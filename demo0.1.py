@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # coding=utf-8
+import time
 import re
 import requests
 from requests.packages import urllib3
@@ -56,6 +57,7 @@ ipadd = {
 	'172.17.1.8'	:	'789',
 	'192.168.1.9'		:	'788'
 	}
+print("开始下载：")
 for ip,ipcode in ipadd.items():
 
 	r = s.post('https://192.168.1.100/Orion/NetPerfMon/CustomChart.aspx?ChartName=HostAvgCPULoad&Title=&SubTitle=&SubTitle2=&Width=640&Height=0&SampleSize=30M&Period=LAST%207%20DAYS&ShowTrend=True&FontSize=1&NetObject=N:'+ str(ipcode), verify=False,headers=headers)
@@ -78,4 +80,6 @@ for ip,ipcode in ipadd.items():
 #print(ir.text)
 	with open('D:/test/img/'+ str(ip) + ' - last7day.png', 'wb') as f:
 		f.write(img)
-
+	print("完成设备" + str(ip) + "的图片下载!\n")
+	time.sleep(5)
+print("全部下载完成！")
